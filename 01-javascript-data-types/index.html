@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<script>
+    const foo = a => a;
+    const bar = b => b;
+    const baz = c => c;
+
+    // console.error(baz(bar(foo))(100));
+
+    // const args = ['a', 'b', 'c'];
+
+    function curry (fn) {
+        const counter = fn.length;
+
+        console.error('counter', counter);
+
+        const createStep = (step, result) => {
+          if (!step) {
+            const boo = result();
+            console.error('boo', boo);
+            return;
+          }
+
+          // const wrapper = () => result;
+
+          return createStep(step - 1, () => result);
+        };
+
+        const foo = createStep(counter, a => a)
+
+        console.error('foo', foo);
+
+        return foo;
+    }
+
+    const sum = (a, b, c) => a + b + c;
+    const sumCurried = curry(sum);
+
+    console.error(sumCurried(1));
+    console.error(sumCurried(1)(2));
+    console.error(sumCurried(1)(2)(3)(4));
+    // console.error(sumCurried(1)(2)(3)(4)(5));
+    // console.error(sumCurried(1)(2)(3)(4));
+</script>

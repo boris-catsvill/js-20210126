@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    const pick = (obj, ...path) => {
+      const result = {};
+
+      for (const key of Object.keys(obj)) {
+        if (path.includes(key)) {
+          result[key] = obj[key];
+        }
+      }
+
+      return result;
+    };
+
+    const omit = (obj, ...path) => {
+      const result = {};
+
+      for (const key of Object.keys(obj)) {
+        if (!path.includes(key)) {
+          result[key] = obj[key];
+        }
+      }
+
+      return result;
+    };
+
+    const createSelector = (fn, name) =>{
+      const rules = {
+        pick: (path, key) => path.includes(key),
+        omit: (path, key) => !path.includes(key),
+      };
+
+      return (obj, ...path) => {
+        const result = {};
+
+        for (const key of Object.keys(obj)) {
+          if (rules[name](path, key)) {
+            result[key] = obj[key];
+          }
+        }
+
+        return result;
+      }
+    };
+</script>
+</body>
+</html>
