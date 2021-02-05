@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<body></body>
+
+<div id="root"></div>
+<script>
+  class Component {
+    constructor(description) {
+      this.description = description;
+    }
+
+    getDescription () {
+      return this.description;
+    }
+  }
+
+  const obj = new Component('hello');
+
+  console.log(obj);
+  console.log(obj.getDescription())
+</script>
