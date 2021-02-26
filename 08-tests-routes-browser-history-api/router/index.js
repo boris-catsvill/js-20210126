@@ -2,14 +2,14 @@ import renderPage from './render-page.js';
 
 // performs routing on all links
 export default class Router {
-  constructor() {
-    this.routes = [];
+  routes = [];
 
+  constructor() {
     this.initEventListeners();
   }
 
   initEventListeners () {
-    document.addEventListener('click', event => {
+    document.addEventListener('pointerdown', event => {
       const link = event.target.closest('a');
 
       if (!link) return;
